@@ -1,15 +1,16 @@
-import { ApiProperty } from "@nestjs/swagger";
 import {
-  ForeignKey,
+  BelongsToMany,
   Column,
   DataType,
+  ForeignKey,
   Model,
   Table,
 } from "sequelize-typescript";
-import { User } from "src/users/users.model";
+import { ApiProperty } from "@nestjs/swagger";
+import { User } from "../users/users.model";
 import { Role } from "./roles.model";
 
-@Table({ tableName: "user-roles", createdAt: false, updatedAt: false })
+@Table({ tableName: "user_roles", createdAt: false, updatedAt: false })
 export class UserRoles extends Model<UserRoles> {
   @Column({
     type: DataType.INTEGER,
@@ -20,10 +21,10 @@ export class UserRoles extends Model<UserRoles> {
   id: number;
 
   @ForeignKey(() => Role)
-  @Column({ type: DataType.NUMBER })
+  @Column({ type: DataType.INTEGER })
   roleId: number;
 
   @ForeignKey(() => User)
-  @Column({ type: DataType.NUMBER })
+  @Column({ type: DataType.INTEGER })
   userId: number;
 }
